@@ -32,6 +32,9 @@ if ingradients_list:
 
      for fruit_chosen in ingradients_list:
          ingradients_string += fruit_chosen + ' '
+         st.subheader(fruit_chosen + 'Nutrition Information')
+         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
+         sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)       
 
      #st.write(ingradients_string)
 
@@ -48,5 +51,4 @@ if ingradients_list:
      if ingradients_string:
          session.sql(my_insert_stmt).collect()
          st.success('Your Smoothie is ordered!', icon="✅")
-         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-         sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
+
